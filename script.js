@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateAmount() {
         currentAmount += increasePerSecond;
-        document.getElementById("amount").textContent = currentAmount.toFixed(2);
+        document.getElementById("amount").textContent = currentAmount.toFixed(4);
     }
 
     updateAmount(); // Устанавливаем начальное значение при загрузке
