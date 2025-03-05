@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const newAmount = calculateBaseAmount();
         gsap.to({ value: currentAmount }, { 
             value: newAmount, 
-            duration: 0.8, 
-            ease: "none",
+            duration: 2.5, 
+            ease: "back.out(4)",
             onUpdate: function () {
                 amountElement.textContent = this.targets()[0].value.toFixed(4);
             }
