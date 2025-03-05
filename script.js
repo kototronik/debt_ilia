@@ -1,24 +1,32 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    const startDate = Date.UTC(2025, 2, 2, 0, 0, 0); // 2 марта 2025, 00:00:00 UTC
-    const startAmount = 150; // Начальная сумма
-    const increasePerDay = 50; // Сколько рублей добавляется за день
-    const secondsInDay = 86400; // Количество секунд в сутках
-    const increasePerSecond = increasePerDay / secondsInDay; // Сколько прибавляется за 1 секунду
+    const startDate = Date.UTC(2025, 2, 2, 0, 0, 0);
+    const startAmount = 150;
+    const increasePerDay = 50;
+    const secondsInDay = 86400;
+    const increasePerSecond = increasePerDay / secondsInDay;
 
     function calculateBaseAmount() {
-        const nowUTC = Date.now(); // Время в миллисекундах (UTC)
-        const timePassedInSeconds = Math.floor((nowUTC - startDate) / 1000); // Разница в секундах
+        const nowUTC = Date.now();
+        const timePassedInSeconds = Math.floor((nowUTC - startDate) / 1000);
         return startAmount + timePassedInSeconds * increasePerSecond;
     }
 
     let currentAmount = calculateBaseAmount();
+    const amountElement = document.getElementById("amount");
 
     function updateAmount() {
-        currentAmount += increasePerSecond;
-        document.getElementById("amount").textContent = currentAmount.toFixed(4);
+        const newAmount = calculateBaseAmount();
+        gsap.to({ value: currentAmount }, { 
+            value: newAmount, 
+            duration: 1, 
+            ease: "none",
+            onUpdate: function () {
+                amountElement.textContent = this.targets()[0].value.toFixed(4);
+            }
+        });
+        currentAmount = newAmount;
     }
 
-    updateAmount(); // Устанавливаем начальное значение при загрузке
-    setInterval(updateAmount, 1000); // Обновляем каждую секунду
+    updateAmount();
+    setInterval(updateAmount, 1000);
 });
