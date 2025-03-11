@@ -1,7 +1,7 @@
 
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,12 @@ body {
     color: white;
     text-align: center;
     margin: 0;
+}
+
+.amount span {
+    display: inline-block;
+    min-width: 5px;
+    text-align: center;
 }
 
 .container {
@@ -21,23 +27,27 @@ body {
 }
 
 h1 {
+    font-family: 'Courier New', Courier, monospace;
     margin: 0 0 10px;
     font-size: 2.5rem;
     animation: slideIn 1s ease-in-out;
 }
 
 .amount {
-    font-size: 1.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
 .link {
+    font-family: 'Courier New', Courier, monospace;
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 1.2rem;
     color: #ffeb3b;
     text-decoration: none;
     transition: transform 0.3s ease-in-out;
+    font-weight: bold;
 }
 
 .link:hover {
