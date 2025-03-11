@@ -1,27 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const startDate = Date.UTC(2025, 2, 2, 0, 0, 0);
-    const startAmount = 150;
-    const increasePerDay = 50;
-    const secondsInDay = 86400;
-    const increasePerSecond = increasePerDay / secondsInDay;
+    const startDate = Date.UTC(2025, 2, 11, 0, 0, 0); 
+    const startAmount = 600; 
+    const increasePerDay = 1000; 
+    const secondsInDay = 86400; 
+    const increasePerSecond = increasePerDay / secondsInDay; 
 
     function calculateBaseAmount() {
-        const nowUTC = Date.now();
+        const nowUTC = Date.now(); 
         const timePassedInSeconds = Math.floor((nowUTC - startDate) / 1000);
-        return startAmount + timePassedInSeconds * increasePerSecond;
+        return startAmount * timePassedInSeconds * increasePerSecond;
     }
 
     let currentAmount = calculateBaseAmount();
     const amountElement = document.getElementById("amount");
 
+    function formatNumber(value) {
+        return value
+            .toFixed(2) 
+            .replace(/\B(?=(\d{3})+(?!\d))/g, " "); 
+    }
+
     function updateAmount() {
         const newAmount = calculateBaseAmount();
         gsap.to({ value: currentAmount }, { 
             value: newAmount, 
-            duration: 2.5, 
-            ease: "back.out(4)",
+            duration: 1, 
+            ease: "none",
             onUpdate: function () {
-                amountElement.textContent = this.targets()[0].value.toFixed(4);
+                amountElement.textContent = formatNumber(this.targets()[0].value);
             }
         });
         currentAmount = newAmount;
